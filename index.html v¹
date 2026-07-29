@@ -7,130 +7,136 @@
 <title>Word Master</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+
+*{
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
 }
 
-body {
-    margin: 0;
-    background: #f5f5f5;
-    color: #222;
-    transition: 0.3s;
+body{
+    margin:0;
+    background:#f5f5f5;
+    color:#222;
 }
 
-body.dark {
-    background: #121212;
-    color: white;
+.container{
+    max-width:500px;
+    margin:auto;
+    padding:20px;
 }
 
-.container {
-    max-width: 500px;
-    margin: auto;
-    padding: 20px;
+.card{
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
-.card {
-    background: white;
-    padding: 20px;
-    border-radius: 20px;
-    margin-bottom: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+h1{
+    text-align:center;
+    margin-bottom:5px;
 }
 
-.dark .card {
-    background: #1e1e1e;
+.subtitle{
+    text-align:center;
+    color:#666;
 }
 
-h1 {
-    text-align: center;
-    margin-bottom: 5px;
+.stats{
+    display:flex;
+    justify-content:space-around;
+    text-align:center;
 }
 
-.subtitle {
-    text-align: center;
-    color: gray;
-    margin-bottom: 20px;
+.stat{
+    font-size:14px;
 }
 
-input {
-    width: 100%;
-    padding: 12px;
-    border-radius: 12px;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
-    font-size: 16px;
+.number{
+    font-size:25px;
+    font-weight:bold;
 }
 
-button {
-    width: 100%;
-    padding: 13px;
-    border: none;
-    border-radius: 12px;
-    background: #4a6cff;
-    color: white;
-    font-size: 16px;
-    margin-top: 8px;
+button{
+
+    width:100%;
+    padding:15px;
+    margin-top:10px;
+
+    border:none;
+    border-radius:15px;
+
+    background:#333;
+    color:white;
+
+    font-size:16px;
+
 }
 
-button:active {
-    transform: scale(0.98);
+button:active{
+    transform:scale(0.98);
 }
 
-.menu button {
-    background: #333;
+
+.quote{
+
+    text-align:center;
+    font-style:italic;
+    color:#555;
+
 }
 
-.dark .menu button {
-    background: #444;
+
+.hidden{
+    display:none;
 }
 
-.hidden {
-    display: none;
+
+input{
+
+    width:100%;
+    padding:15px;
+
+    border-radius:12px;
+    border:1px solid #ccc;
+
+    font-size:16px;
+
 }
 
-.stats {
-    line-height: 1.8;
+
+.dark{
+
+    background:#121212;
+    color:white;
+
 }
 
-.message {
-    text-align: center;
-    font-style: italic;
-    margin-top: 10px;
+
+.dark .card{
+
+    background:#1e1e1e;
+
 }
+
+
+.dark .quote{
+
+    color:#ddd;
+
+}
+
 
 </style>
+
 </head>
 
 
 <body>
 
+
 <div class="container">
-
-
-<div class="card" id="loginBox">
-
-<h1>Word Master</h1>
-
-<div class="subtitle">
-Remember More, Forget Less.
-</div>
-
-<input 
-id="passwordInput"
-type="password"
-maxlength="4"
-placeholder="4자리 비밀번호">
-
-<button onclick="login()">
-시작하기
-</button>
-
-</div>
-
-
-
-<div id="app" class="hidden">
 
 
 <div class="card">
@@ -144,236 +150,92 @@ Remember More, Forget Less.
 </div>
 
 
-<div class="card stats">
 
-오늘의 목표 : 30문제
+<div class="card">
 
-<br>
+<div class="stats">
 
-<span id="progress">
-0 / 30
-</span>
 
-<hr>
+<div class="stat">
 
-전체 정답률 :
-<span id="accuracy">
-0%
-</span>
+오늘 목표
 
-<br>
+<div class="number">
+30
+</div>
 
-전체 단어 :
-<span id="wordCount">
-0개
-</span>
-
-<br>
-
-암기 완료 :
-<span id="completeCount">
-0개
-</span>
-
+문제
 
 </div>
 
 
-<div class="card menu">
+
+<div class="stat">
+
+정답률
+
+<div class="number" id="accuracy">
+0%
+</div>
+
+</div>
+
+
+
+<div class="stat">
+
+전체 단어
+
+<div class="number" id="wordCount">
+0
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+
+
+<div class="card">
+
 
 <button onclick="startQuiz()">
 퀴즈 시작
 </button>
 
+
 <button onclick="addWord()">
 단어 추가
 </button>
+
 
 <button onclick="toggleDark()">
 다크 모드
 </button>
 
 
+
 </div>
 
 
-<div class="card">
 
-<div class="message" id="quote">
+
+
+<div class="card quote">
+
+오늘의 한마디
+
+<br><br>
 
 "5문제만 풀어도 괜찮아요."
 
 </div>
 
-</div>
-
-</div>
 
 
 </div>
-
-<script>
-
-<script>
-
-let words = JSON.parse(localStorage.getItem("words")) || [];
-
-let savedPassword = localStorage.getItem("password");
-
-
-function login(){
-
-    let input = document.getElementById("passwordInput").value;
-
-    if(input.length !== 4){
-        alert("4자리 숫자를 입력하세요.");
-        return;
-    }
-
-
-    if(savedPassword == null){
-
-        localStorage.setItem("password", input);
-        alert("비밀번호가 저장되었습니다.");
-
-    } else {
-
-        if(input !== savedPassword){
-            alert("비밀번호가 틀렸습니다.");
-            return;
-        }
-
-    }
-
-
-    document.getElementById("loginBox").classList.add("hidden");
-    document.getElementById("app").classList.remove("hidden");
-
-    updateStats();
-
-}
-
-
-
-function addWord(){
-
-    let word = prompt("외울 단어를 입력하세요.");
-
-    if(word == null || word.trim()==""){
-        return;
-    }
-
-
-    words.push({
-
-        word: word,
-        correct: 0,
-        wrong: 0,
-        complete:false
-
-    });
-
-
-    saveWords();
-
-    updateStats();
-
-    alert("단어가 추가되었습니다!");
-
-}
-
-
-
-function saveWords(){
-
-    localStorage.setItem(
-        "words",
-        JSON.stringify(words)
-    );
-
-}
-
-
-
-function updateStats(){
-
-    document.getElementById("wordCount").innerText =
-    words.length + "개";
-
-
-    let complete =
-    words.filter(w=>w.complete).length;
-
-
-    document.getElementById("completeCount").innerText =
-    complete + "개";
-
-
-    let total = 0;
-    let correct = 0;
-
-
-    words.forEach(w=>{
-
-        total += w.correct + w.wrong;
-        correct += w.correct;
-
-    });
-
-
-    let rate = 0;
-
-    if(total>0){
-        rate = Math.round(correct/total*100);
-    }
-
-
-    document.getElementById("accuracy").innerText =
-    rate + "%";
-
-}
-
-
-
-function startQuiz(){
-
-    if(words.length===0){
-
-        alert("먼저 단어를 추가하세요.");
-
-        return;
-
-    }
-
-
-    let random =
-    words[Math.floor(Math.random()*words.length)];
-
-
-    let answer =
-    prompt(random.word + "의 뜻을 입력하세요.");
-
-
-    if(answer){
-
-        random.correct++;
-
-        alert("정답 처리!");
-
-    }
-
-
-    saveWords();
-
-    updateStats();
-
-}
-
-
-
-</script>
-
-</script>
-
-</body>
-</html>
