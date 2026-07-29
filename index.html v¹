@@ -239,3 +239,213 @@ Remember More, Forget Less.
 
 
 </div>
+
+<script>
+
+let words = JSON.parse(localStorage.getItem("words")) || [];
+
+let password = localStorage.getItem("password");
+
+
+function addWord(){
+
+    let word = prompt("외울 단어를 입력하세요.");
+
+    if(word === null || word.trim() === ""){
+        return;
+    }
+
+
+    words.push({
+
+        word: word,
+        correct:0,
+        wrong:0
+
+    });
+
+
+    saveWords();
+
+    updateStats();
+
+    alert("단어가 추가되었습니다!");
+
+}
+
+
+
+function saveWords(){
+
+    localStorage.setItem(
+        "words",
+        JSON.stringify(words)
+    );
+
+}
+
+
+
+function updateStats(){
+
+    document.getElementById("wordCount").innerText =
+    words.length;
+
+
+    let total = 0;
+    let correct = 0;
+
+
+    words.forEach(function(w){
+
+        total += w.correct + w.wrong;
+
+        correct += w.correct;
+
+    });
+
+
+    let rate = 0;
+
+
+    if(total > 0){
+
+        rate = Math.round(
+            correct / total * 100
+        );
+
+    }
+
+
+    document.getElementById("accuracy").innerText =
+    rate + "%";
+
+
+}
+
+
+
+function startQuiz(){
+
+    if(words.length === 0){
+
+        alert("먼저 단어를 추가하세요!");
+
+        return;
+
+    }
+
+
+    let random =
+    words[Math.floor(Math.random()*words.length)];
+
+
+    let answer =
+    prompt(random.word + "의 뜻은?");
+
+
+    if(answer){
+
+        random.correct++;
+
+        alert("정답 처리!");
+
+    }
+
+
+    saveWords();
+
+    updateStats();
+
+}
+
+
+
+
+function toggleDark(){
+
+    document.body.classList.toggle("dark");
+
+}
+
+
+
+updateStats();
+
+
+</script>
+
+<div class="card">
+
+<h3>로그인</h3>
+
+<input 
+id="passwordInput"
+type="password"
+maxlength="4"
+placeholder="4자리 숫자 비밀번호">
+
+
+<button onclick="login()">
+시작하기
+</button>
+
+
+</div>
+
+
+
+<script>
+
+function login(){
+
+    let input =
+    document.getElementById("passwordInput").value;
+
+
+    if(input.length !== 4){
+
+        alert("4자리 숫자를 입력하세요.");
+
+        return;
+
+    }
+
+
+
+    if(password === null){
+
+        localStorage.setItem(
+            "password",
+            input
+        );
+
+        password = input;
+
+        alert("비밀번호가 저장되었습니다.");
+
+    }
+
+
+    else if(input !== password){
+
+        alert("비밀번호가 틀렸습니다.");
+
+        return;
+
+    }
+
+
+
+    alert("Word Master 시작!");
+
+}
+
+
+
+</script>
+
+
+</body>
+
+</html>
