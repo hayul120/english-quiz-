@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>영단어 퀴즈</title>
+
+<style>
+body{
+font-family:sans-serif;
+padding:20px;
+background:#f4f4f4;
+}
+
+.box{
+background:white;
+padding:20px;
+border-radius:15px;
+max-width:500px;
+margin:auto;
+}
+
+input{
+width:100%;
+padding:12px;
+margin-top:10px;
+box-sizing:border-box;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+font-size:16px;
+cursor:pointer;
+}
+
+#result{
+margin-top:15px;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h1>영단어 퀴즈</h1>
+
+<h3>단어 추가</h3>
+
+<input id="english" placeholder="영어 단어">
+<input id="meaning" placeholder="뜻">
+
+<button onclick="addWord()">추가하기</button>
+
+<hr>
+
+<h3>퀴즈</h3>
+
+<p id="question">문제를 시작해주세요.</p>
+
+<input id="answer" placeholder="영어 단어 입력">
+
+<button onclick="startQuiz()">문제 출제</button>
+
+<button onclick="checkAnswer()">정답 확인</button>
+
+<p id="result"></p>
+
+</div>
+
+<script>
+
+let words=[];
+let currentWord=null;
+
+function addWord(){
+
+let english=document.getElementById("english").value.trim();
+let meaning=document.getElementById("meaning").value.trim();
+
+if(!english || !meaning){
+alert("모두 입력해주세요.");
+return;
+}
+
+words.push({
+english:english,
+meaning:meaning
+});
+
+document.getElementById("english").value="";
+document.getElementById("meaning").value="";
+
+alert("저장되었습니다!");
+
+}
+
+
+function startQuiz(){
+
+if(words.length===0){
+alert("단어를 먼저 추가해주세요.");
+return;
+}
+
+let random=Math.floor(Math.random()*words.length);
+
+currentWord=words[random];
+
+document.getElementById("question
