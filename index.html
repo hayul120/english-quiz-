@@ -249,9 +249,16 @@ let password = localStorage.getItem("password");
 
 function addWord(){
 
-    let word = prompt("외울 단어를 입력하세요.");
+    let word = prompt("외울 영단어를 입력하세요.");
 
     if(word === null || word.trim() === ""){
+        return;
+    }
+
+
+    let meaning = prompt("뜻을 입력하세요.");
+
+    if(meaning === null || meaning.trim() === ""){
         return;
     }
 
@@ -259,6 +266,7 @@ function addWord(){
     words.push({
 
         word: word,
+        meaning: meaning,
         correct:0,
         wrong:0
 
