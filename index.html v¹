@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Word Master</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    background: #f5f5f5;
+    color: #222;
+    transition: 0.3s;
+}
+
+body.dark {
+    background: #121212;
+    color: white;
+}
+
+.container {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.dark .card {
+    background: #1e1e1e;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    text-align: center;
+    color: gray;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 12px;
+    background: #4a6cff;
+    color: white;
+    font-size: 16px;
+    margin-top: 8px;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.menu button {
+    background: #333;
+}
+
+.dark .menu button {
+    background: #444;
+}
+
+.hidden {
+    display: none;
+}
+
+.stats {
+    line-height: 1.8;
+}
+
+.message {
+    text-align: center;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+<div class="card" id="loginBox">
+
+<h1>Word Master</h1>
+
+<div class="subtitle">
+Remember More, Forget Less.
+</div>
+
+<input 
+id="passwordInput"
+type="password"
+maxlength="4"
+placeholder="4자리 비밀번호">
+
+<button onclick="login()">
+시작하기
+</button>
+
+</div>
+
+
+
+<div id="app" class="hidden">
+
+
+<div class="card">
+
+<h1>Word Master</h1>
+
+<div class="subtitle">
+Remember More, Forget Less.
+</div>
+
+</div>
+
+
+<div class="card stats">
+
+오늘의 목표 : 30문제
+
+<br>
+
+<span id="progress">
+0 / 30
+</span>
+
+<hr>
+
+전체 정답률 :
+<span id="accuracy">
+0%
+</span>
+
+<br>
+
+전체 단어 :
+<span id="wordCount">
+0개
+</span>
+
+<br>
+
+암기 완료 :
+<span id="completeCount">
+0개
+</span>
+
+
+</div>
+
+
+<div class="card menu">
+
+<button onclick="startQuiz()">
+퀴즈 시작
+</button>
+
+<button onclick="addWord()">
+단어 추가
+</button>
+
+<button onclick="toggleDark()">
+다크 모드
+</button>
+
+
+</div>
+
+
+<div class="card">
+
+<div class="message" id="quote">
+
+"5문제만 풀어도 괜찮아요."
+
+</div>
+
+</div>
+
+
+</div>
+
+
+</div>
