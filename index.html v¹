@@ -207,8 +207,173 @@ Remember More, Forget Less.
 
 </div>
 
-
 </div>
 
 
 </div>
+
+<script>
+
+<script>
+
+let words = JSON.parse(localStorage.getItem("words")) || [];
+
+let savedPassword = localStorage.getItem("password");
+
+
+function login(){
+
+    let input = document.getElementById("passwordInput").value;
+
+    if(input.length !== 4){
+        alert("4자리 숫자를 입력하세요.");
+        return;
+    }
+
+
+    if(savedPassword == null){
+
+        localStorage.setItem("password", input);
+        alert("비밀번호가 저장되었습니다.");
+
+    } else {
+
+        if(input !== savedPassword){
+            alert("비밀번호가 틀렸습니다.");
+            return;
+        }
+
+    }
+
+
+    document.getElementById("loginBox").classList.add("hidden");
+    document.getElementById("app").classList.remove("hidden");
+
+    updateStats();
+
+}
+
+
+
+function addWord(){
+
+    let word = prompt("외울 단어를 입력하세요.");
+
+    if(word == null || word.trim()==""){
+        return;
+    }
+
+
+    words.push({
+
+        word: word,
+        correct: 0,
+        wrong: 0,
+        complete:false
+
+    });
+
+
+    saveWords();
+
+    updateStats();
+
+    alert("단어가 추가되었습니다!");
+
+}
+
+
+
+function saveWords(){
+
+    localStorage.setItem(
+        "words",
+        JSON.stringify(words)
+    );
+
+}
+
+
+
+function updateStats(){
+
+    document.getElementById("wordCount").innerText =
+    words.length + "개";
+
+
+    let complete =
+    words.filter(w=>w.complete).length;
+
+
+    document.getElementById("completeCount").innerText =
+    complete + "개";
+
+
+    let total = 0;
+    let correct = 0;
+
+
+    words.forEach(w=>{
+
+        total += w.correct + w.wrong;
+        correct += w.correct;
+
+    });
+
+
+    let rate = 0;
+
+    if(total>0){
+        rate = Math.round(correct/total*100);
+    }
+
+
+    document.getElementById("accuracy").innerText =
+    rate + "%";
+
+}
+
+
+
+function startQuiz(){
+
+    if(words.length===0){
+
+        alert("먼저 단어를 추가하세요.");
+
+        return;
+
+    }
+
+
+    let random =
+    words[Math.floor(Math.random()*words.length)];
+
+
+    let answer =
+    prompt(random.word + "의 뜻을 입력하세요.");
+
+
+    if(answer){
+
+        random.correct++;
+
+        alert("정답 처리!");
+
+    }
+
+
+    saveWords();
+
+    updateStats();
+
+}
+
+
+
+</script>
+
+</script>
+
+</body>
+</html>
