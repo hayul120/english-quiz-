@@ -451,8 +451,12 @@ function showWrongNotes(){
 <div>
 <hr>
 <b>${w.word}</b><br>
-내 답: ${w.wrongAnswer}<br>
-정답: ${w.meaning}<br><br>
+내 답: ${w.wrongAnswer}<br><br>
+
+<button onclick="showAnswer('${w.word}')">
+정답 보기
+</button>
+<br>
 
 <button type="button" onclick="retryWrong('${w.word}')">
 다시 풀기
@@ -469,7 +473,19 @@ function showWrongNotes(){
     box.classList.remove("hidden");
 
 }
+function showAnswer(word){
 
+    let target = wrongNotes.find(
+        function(w){
+            return w.word === word;
+        }
+    );
+
+    alert(
+        "정답: " + target.meaning
+    );
+
+}
 function retryWrong(word){
 
     let targetIndex = wrongNotes.findIndex(
