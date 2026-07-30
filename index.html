@@ -234,7 +234,15 @@ Remember More, Forget Less.
 </div>
 
 
+<div class="card">
 
+<h3>📚 단어 관리</h3>
+
+<div id="wordList">
+단어가 없습니다.
+</div>
+
+</div>
 
 
 <div class="card quote">
@@ -349,7 +357,72 @@ function updateStats(){
 
 
 }
+function showWords(){
 
+    let list =
+    document.getElementById("wordList");
+
+
+    if(words.length === 0){
+
+        list.innerHTML = "단어가 없습니다.";
+
+        return;
+
+    }
+
+
+    list.innerHTML = "";
+
+
+    words.forEach(function(w,index){
+
+        list.innerHTML +=
+`
+<div>
+<hr>
+
+<b>${w.word}</b>
+<br>
+${w.meaning}
+
+<br>
+
+<button onclick="deleteWord(${index})">
+삭제
+</button>
+
+</div>
+`;
+
+    });
+
+}
+
+function deleteWord(index){
+
+    let check =
+    confirm(
+        words[index].word + "를 삭제할까요?"
+    );
+
+
+    if(check){
+
+        words.splice(index,1);
+
+
+        saveWords();
+
+        updateStats();
+
+        showWords();
+
+        alert("삭제되었습니다.");
+
+    }
+
+}
 
 
 function startQuiz(){
