@@ -238,8 +238,11 @@ Remember More, Forget Less.
 
 <h3>📚 단어 관리</h3>
 
-<div id="wordList">
-단어가 없습니다.
+<button onclick="toggleWordList()">
+단어 목록 보기
+</button>
+
+<div id="wordList" class="hidden">
 </div>
 
 </div>
@@ -404,7 +407,16 @@ ${w.meaning}
     });
 
 }
+function toggleWordList(){
 
+    let list =
+    document.getElementById("wordList");
+
+
+    list.classList.toggle("hidden");
+
+
+}
 function deleteWord(index){
 
     let check =
