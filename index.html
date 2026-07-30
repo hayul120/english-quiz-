@@ -207,8 +207,16 @@ Remember More, Forget Less.
 <div class="card">
 
 
-<button onclick="startQuiz()">
-퀴즈 시작
+<h3>📝 시험</h3>
+
+<input 
+id="testCount"
+type="number"
+placeholder="몇 문제 풀까요?">
+
+
+<button onclick="startTest()">
+시험 시작
 </button>
 
 
@@ -275,7 +283,107 @@ let words = JSON.parse(localStorage.getItem("words")) || [];
 let password = localStorage.getItem("password");
 
 let wrongNotes = JSON.parse(localStorage.getItem("wrongNotes")) || [];
+function startTest(){
 
+    let count =
+    Number(document.getElementById("testCount").value);
+
+
+    if(!count || count <= 0){
+
+        alert("문제 수를 입력하세요.");
+
+        return;
+
+    }
+
+
+    if(words.length === 0){
+
+        alert("먼저 단어를 추가하세요.");
+
+        return;
+
+    }
+
+
+    if(count > words.length){
+
+        count = words.length;
+
+    }
+
+
+    let testWords = [];
+
+
+    while(testWords.length < count){
+
+        let random =
+        words[Math.floor(Math.random()*words.length)];
+
+
+        if(!testWords.includes(random)){
+
+            testWords.push(random);
+
+        }
+
+    }
+
+
+    let correct = 0;
+
+
+    for(let i = 0; i < testWords.length; i++){
+
+        let answer =
+        prompt(
+            (i+1) + "번째 문제\n\n"
+            + testWords[i].meaning
+            + "\n\n영어 단어는?"
+        );
+
+
+        if(answer === null){
+
+            return;
+
+        }
+
+
+        if(answer.trim() === testWords[i].word.trim()){
+
+            correct++;
+
+            alert("정답! 🎉");
+
+        }
+
+        else{
+
+            alert(
+                "틀렸습니다.\n정답: "
+                + testWords[i].word
+            );
+
+        }
+
+    }
+
+
+    let rate =
+    Math.round(correct / count * 100);
+
+
+    alert(
+        "시험 종료!\n\n"
+        + "총 문제: " + count
+        + "\n정답: " + correct
+        + "\n정답률: " + rate + "%"
+    );
+
+}
 function addWord(){
 
     let word = prompt("외울 영단어를 입력하세요.");
