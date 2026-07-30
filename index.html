@@ -249,6 +249,7 @@ let words = JSON.parse(localStorage.getItem("words")) || [];
 
 let password = localStorage.getItem("password");
 
+let wrongNotes = JSON.parse(localStorage.getItem("wrongNotes")) || [];
 
 function addWord(){
 
@@ -370,14 +371,32 @@ function startQuiz(){
 
     else{
 
-        random.wrong++;
+    random.wrong++;
 
-        alert(
-            "틀렸습니다.\n\n정답: " 
-            + random.meaning
-        );
 
-    }
+    wrongNotes.push({
+
+        word: random.word,
+
+        meaning: random.meaning,
+
+        wrongAnswer: answer
+
+    });
+
+
+    localStorage.setItem(
+        "wrongNotes",
+        JSON.stringify(wrongNotes)
+    );
+
+
+    alert(
+        "틀렸습니다.\n\n정답: " 
+        + random.meaning
+    );
+
+}
 
 
     saveWords();
