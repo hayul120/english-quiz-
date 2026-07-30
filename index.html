@@ -490,11 +490,13 @@ prompt(random.meaning + "의 영어 단어는?");
     }
 
 
-    if(answer.trim() === (random.meaning || "").trim()){
+   if(answer.trim() === (random.word || "").trim()){
 
-        random.correct++;
+    random.correct++;
 
-        alert("정답입니다! 🎉");
+    alert("정답입니다! 🎉");
+
+}
 
     }
 
@@ -522,7 +524,7 @@ prompt(random.meaning + "의 영어 단어는?");
 
     alert(
         "틀렸습니다.\n\n정답: " 
-        + random.meaning
++ random.word
     );
 
 }
@@ -617,8 +619,8 @@ function retryWrong(word){
 
 
     let answer = prompt(
-        target.word + "의 뜻은?"
-    );
+    target.meaning + "의 영어 단어는?"
+);
 
 
     if(answer.trim() === target.meaning.trim()){
@@ -677,7 +679,7 @@ prompt(random.meaning + "의 영어 단어는?");
     }
 
 
-    if(answer.trim() === random.meaning.trim()){
+    if(answer.trim() === random.word.trim()){
 
         alert("정답입니다! 🎉");
 
@@ -687,7 +689,7 @@ prompt(random.meaning + "의 영어 단어는?");
 
         alert(
             "틀렸습니다.\n정답: "
-            + random.meaning
+            + random.word
         );
 
     }
