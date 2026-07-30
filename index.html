@@ -302,9 +302,11 @@ function addWord(){
 
     saveWords();
 
-    updateStats();
+updateStats();
 
-    alert("단어가 추가되었습니다!");
+showWords();
+
+alert("단어가 추가되었습니다!");
 
 }
 
@@ -708,7 +710,7 @@ function checkPassword(){
 
 </script>
 
-<div class="card">
+<div class="card" id="loginBox">
 
 <h3>로그인</h3>
 
@@ -775,6 +777,7 @@ function login(){
 document.getElementById("app").style.display="block";
 
 document.getElementById("loginBox").style.display="none";
+showWords();
 }
 
 
