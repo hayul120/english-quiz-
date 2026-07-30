@@ -788,22 +788,23 @@ function login(){
     }
 
 
+    let savedPassword =
+    localStorage.getItem("password");
 
-    if(password === null){
+
+    if(savedPassword === null){
 
         localStorage.setItem(
             "password",
             input
         );
 
-        password = input;
-
         alert("비밀번호가 저장되었습니다.");
 
     }
 
 
-    else if(input !== password){
+    else if(input !== savedPassword){
 
         alert("비밀번호가 틀렸습니다.");
 
@@ -812,14 +813,18 @@ function login(){
     }
 
 
-
     alert("Word Master 시작!");
 
-document.getElementById("app").style.display="block";
 
-showWords();
+    document.getElementById("app").style.display="block";
+
+
+    document.getElementById("loginBox").style.display="none";
+
+
+    showWords();
+
 }
-
 
 
 </script>
