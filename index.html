@@ -364,6 +364,8 @@ alert("정답! 🎉");
 
         else{
 
+    testWords[i].wrong++;
+
     wrongNotes.push({
 
         word:testWords[i].word,
@@ -372,11 +374,7 @@ alert("정답! 🎉");
 
     });
 
-
-    localStorage.setItem(
-        "wrongNotes",
-        JSON.stringify(wrongNotes)
-    );
+}
 
 
     alert(
@@ -773,7 +771,7 @@ function retryWrong(word){
 );
 
 
-    if(answer.trim() === target.meaning.trim()){
+    if(answer.trim() === target.word.trim()){
         alert("정답입니다! 🎉");
 
 
@@ -902,38 +900,7 @@ function wrongQuiz(){
 }
 
 
-    let random =
-    wrongNotes[
-        Math.floor(Math.random()*wrongNotes.length)
-    ];
-
-
-    let answer =
-prompt(random.meaning + "의 영어 단어는?");
-
-
-    if(answer === null){
-
-        return;
-
-    }
-
-
-    if(answer.trim() === random.word.trim()){
-
-        alert("정답입니다! 🎉");
-
-    }
-
-    else{
-
-        alert(
-            "틀렸습니다.\n정답: "
-            + random.word
-        );
-
-    }
-
+   
 }
 updateStats();
 
