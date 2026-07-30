@@ -127,6 +127,9 @@ input{
 
 }
 
+#app{
+    display:none;
+}
 
 </style>
 
@@ -136,10 +139,10 @@ input{
 <body>
 
 
-<div class="container">
+<div class="container" id="app">
 
 
-<div class="card">
+<div class="card" id="loginBox">
 
 <h1>Word Master</h1>
 
@@ -396,6 +399,55 @@ function toggleDark(){
 
 updateStats();
 
+function checkPassword(){
+
+    let saved =
+    localStorage.getItem("password");
+
+
+    let input =
+    document.getElementById("passwordInput").value;
+
+
+    if(input.length !== 4){
+
+        alert("4자리 숫자를 입력하세요.");
+        return;
+
+    }
+
+
+    if(saved === null){
+
+        localStorage.setItem(
+            "password",
+            input
+        );
+
+        alert("비밀번호가 설정되었습니다!");
+
+        showApp();
+
+    }
+
+
+    else if(input === saved){
+
+        alert("로그인 성공!");
+
+        showApp();
+
+    }
+
+
+    else{
+
+        alert("비밀번호가 틀렸습니다.");
+
+    }
+
+}
+
 
 </script>
 
@@ -463,6 +515,9 @@ function login(){
 
     alert("Word Master 시작!");
 
+document.getElementById("app").style.display="block";
+
+document.getElementById("loginBox").style.display="none";
 }
 
 
