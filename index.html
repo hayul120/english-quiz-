@@ -390,6 +390,10 @@ ${w.meaning}
 
 <br>
 
+<button onclick="editWord(${index})">
+수정
+</button>
+
 <button onclick="deleteWord(${index})">
 삭제
 </button>
@@ -425,7 +429,42 @@ function deleteWord(index){
     }
 
 }
+function editWord(index){
 
+    let newWord = prompt(
+        "새 단어를 입력하세요.",
+        words[index].word
+    );
+
+
+    if(newWord === null || newWord.trim() === ""){
+        return;
+    }
+
+
+    let newMeaning = prompt(
+        "새 뜻을 입력하세요.",
+        words[index].meaning
+    );
+
+
+    if(newMeaning === null || newMeaning.trim() === ""){
+        return;
+    }
+
+
+    words[index].word = newWord;
+
+    words[index].meaning = newMeaning;
+
+
+    saveWords();
+
+    showWords();
+
+    alert("수정되었습니다!");
+
+}
 
 function startQuiz(){
 
