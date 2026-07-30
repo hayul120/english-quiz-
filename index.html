@@ -472,11 +472,14 @@ function showWrongNotes(){
 
 function retryWrong(word){
 
-    let target = wrongNotes.find(
+    let targetIndex = wrongNotes.findIndex(
         function(w){
             return w.word === word;
         }
     );
+
+
+    let target = wrongNotes[targetIndex];
 
 
     let answer = prompt(
@@ -487,6 +490,18 @@ function retryWrong(word){
     if(answer === target.meaning){
 
         alert("정답입니다! 🎉");
+
+
+        wrongNotes.splice(targetIndex,1);
+
+
+        localStorage.setItem(
+            "wrongNotes",
+            JSON.stringify(wrongNotes)
+        );
+
+
+        showWrongNotes();
 
     }
 
