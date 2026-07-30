@@ -238,10 +238,9 @@ Remember More, Forget Less.
 
 <h3>📚 단어 관리</h3>
 
-<button onclick="toggleWordList()">
+<button id="wordListButton" onclick="toggleWordList()">
 단어 목록 보기
 </button>
-
 <div id="wordList" class="hidden">
 </div>
 
@@ -412,9 +411,24 @@ function toggleWordList(){
     let list =
     document.getElementById("wordList");
 
+    let button =
+    document.getElementById("wordListButton");
+
 
     list.classList.toggle("hidden");
 
+
+    if(list.classList.contains("hidden")){
+
+        button.innerText = "단어 목록 보기";
+
+    }
+
+    else{
+
+        button.innerText = "단어 목록 숨기기";
+
+    }
 
 }
 function deleteWord(index){
