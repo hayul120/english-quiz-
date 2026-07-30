@@ -352,11 +352,27 @@ function startQuiz(){
     prompt(random.word + "의 뜻은?");
 
 
-    if(answer){
+    if(answer === null){
+        return;
+    }
+
+
+    if(answer.trim() === random.meaning.trim()){
 
         random.correct++;
 
-        alert("정답 처리!");
+        alert("정답입니다! 🎉");
+
+    }
+
+    else{
+
+        random.wrong++;
+
+        alert(
+            "틀렸습니다.\n\n정답: " 
+            + random.meaning
+        );
 
     }
 
