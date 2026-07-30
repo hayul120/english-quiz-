@@ -466,7 +466,7 @@ function showWrongNotes(){
     }
 
 
-    box.classList.toggle("hidden");
+    box.classList.remove("hidden");
 
 }
 
@@ -487,8 +487,7 @@ function retryWrong(word){
     );
 
 
-    if(answer === target.meaning){
-
+    if(answer.trim() === target.meaning.trim()){
         alert("정답입니다! 🎉");
 
 
