@@ -360,7 +360,7 @@ function startQuiz(){
     }
 
 
-    if(answer.trim() === random.meaning.trim()){
+    if(answer.trim() === (random.meaning || "").trim()){
 
         random.correct++;
 
