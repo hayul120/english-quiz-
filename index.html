@@ -356,19 +356,37 @@ function startTest(){
 
             correct++;
 
-            alert("정답! 🎉");
+testWords[i].correct++;
+
+alert("정답! 🎉");
 
         }
 
         else{
 
-            alert(
-                "틀렸습니다.\n정답: "
-                + testWords[i].word
-            );
+    wrongNotes.push({
 
-        }
+        word:testWords[i].word,
+        meaning:testWords[i].meaning,
+        wrongAnswer:answer
 
+    });
+
+
+    localStorage.setItem(
+        "wrongNotes",
+        JSON.stringify(wrongNotes)
+    );
+
+
+    alert(
+        "틀렸습니다.\n정답: "
+        + testWords[i].word
+    );
+    saveWords();
+
+updateStats();
+}
     }
 
 
