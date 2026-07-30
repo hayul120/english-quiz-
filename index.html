@@ -806,10 +806,100 @@ function wrongQuiz(){
     if(wrongNotes.length === 0){
 
         alert("오답이 없습니다.");
-
         return;
 
     }
+
+    let count = Number(
+        prompt("몇 문제를 풀까요?")
+    );
+
+    if(!count || count <= 0){
+
+        alert("올바른 숫자를 입력하세요.");
+        return;
+
+    }
+
+    if(count > wrongNotes.length){
+
+        count = wrongNotes.length;
+
+    }
+
+    let testWords = [];
+
+    while(testWords.length < count){
+
+        let random =
+        wrongNotes[
+            Math.floor(
+                Math.random()*wrongNotes.length
+            )
+        ];
+
+        if(!testWords.includes(random)){
+
+            testWords.push(random);
+
+        }
+
+    }
+
+    let correct = 0;
+
+    for(let i = 0; i < testWords.length; i++){
+
+        let answer = prompt(
+
+            (i+1) + "번째 문제\n\n"
+            + testWords[i].meaning
+            + "\n\n영어 단어는?"
+
+        );
+
+        if(answer === null){
+
+            return;
+
+        }
+
+        if(
+            answer.trim()
+            ===
+            testWords[i].word.trim()
+        ){
+
+            correct++;
+
+            alert("정답입니다! 🎉");
+
+        }
+
+        else{
+
+            alert(
+                "틀렸습니다.\n정답 : "
+                + testWords[i].word
+            );
+
+        }
+
+    }
+
+    let rate =
+    Math.round(correct / count * 100);
+
+    alert(
+
+        "오답 시험 종료!\n\n"
+        + "총 문제 : " + count
+        + "\n정답 : " + correct
+        + "\n정답률 : " + rate + "%"
+
+    );
+
+}
 
 
     let random =
