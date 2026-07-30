@@ -984,15 +984,12 @@ function login(){
     let input =
     document.getElementById("passwordInput").value;
 
-
     if(input.length !== 4){
 
         alert("4자리 숫자를 입력하세요.");
-
         return;
 
     }
-
 
     let savedPassword =
     localStorage.getItem("password");
@@ -1009,15 +1006,21 @@ function login(){
 
     }
 
-
     else if(input !== savedPassword){
 
         alert("비밀번호가 틀렸습니다.");
-
         return;
 
     }
-}
+
+    alert("Word Master 시작!");
+
+    showApp();
+
+    showWords();
+
+}   // ← 중요!! login 함수 끝
+
 
 function showApp(){
 
