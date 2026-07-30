@@ -220,7 +220,10 @@ Remember More, Forget Less.
 오답노트
 </button>
 
-
+<button onclick="wrongQuiz()">
+오답 시험
+</button>
+    
 <button onclick="toggleDark()">
 다크 모드
 </button>
@@ -525,6 +528,51 @@ function retryWrong(word){
         alert(
             "틀렸습니다.\n정답: "
             + target.meaning
+        );
+
+    }
+
+}
+
+function wrongQuiz(){
+
+    if(wrongNotes.length === 0){
+
+        alert("오답이 없습니다.");
+
+        return;
+
+    }
+
+
+    let random =
+    wrongNotes[
+        Math.floor(Math.random()*wrongNotes.length)
+    ];
+
+
+    let answer =
+    prompt(random.word + "의 뜻은?");
+
+
+    if(answer === null){
+
+        return;
+
+    }
+
+
+    if(answer.trim() === random.meaning.trim()){
+
+        alert("정답입니다! 🎉");
+
+    }
+
+    else{
+
+        alert(
+            "틀렸습니다.\n정답: "
+            + random.meaning
         );
 
     }
