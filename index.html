@@ -981,45 +981,9 @@ placeholder="4자리 숫자 비밀번호">
 
 function login(){
 
-    let input =
-    document.getElementById("passwordInput").value;
+    alert("로그인 함수 실행");
 
-    if(input.length !== 4){
-
-        alert("4자리 숫자를 입력하세요.");
-        return;
-
-    }
-
-    let savedPassword =
-    localStorage.getItem("password");
-
-
-    if(savedPassword === null){
-
-        localStorage.setItem(
-            "password",
-            input
-        );
-
-        alert("비밀번호가 저장되었습니다.");
-
-    }
-
-    else if(input !== savedPassword){
-
-        alert("비밀번호가 틀렸습니다.");
-        return;
-
-    }
-
-    alert("Word Master 시작!");
-
-    showApp();
-
-    showWords();
-
-}   
+}
 
 
 function showApp(){
